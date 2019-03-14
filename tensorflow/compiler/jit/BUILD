@@ -198,6 +198,7 @@ cc_library(
         "//tensorflow/core/kernels:control_flow_ops",
         "//tensorflow/core/kernels:fifo_queue",
         "//tensorflow/core/kernels:function_ops",
+        "//tensorflow/core/kernels:host_constant_op",
         "//tensorflow/core/kernels:identity_n_op",
         "//tensorflow/core/kernels:identity_op",
         "//tensorflow/core/kernels:no_op",
@@ -629,7 +630,6 @@ tf_cc_test(
     srcs = [
         "build_xla_ops_pass_test.cc",
         "clone_constants_for_better_clustering_test.cc",
-        "compilation_passes_test_main.cc",
         "encapsulate_subgraphs_pass_test.cc",
         "encapsulate_xla_computations_pass_test.cc",
         "extract_outside_compilation_pass_test.cc",

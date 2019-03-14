@@ -23,7 +23,7 @@ limitations under the License.
 
 #include "tensorflow/core/framework/register_types.h"
 #include "tensorflow/core/framework/tensor_types.h"
-#include "tensorflow/core/kernels/cuda_device_array_gpu.h"
+#include "tensorflow/core/kernels/gpu_device_array_gpu.h"
 #include "tensorflow/core/kernels/split_lib_gpu.h"
 #include "tensorflow/core/util/gpu_kernel_helper.h"
 
@@ -57,6 +57,8 @@ TF_CALL_complex64(DEFINE_GPU_KERNELS);
 TF_CALL_complex128(DEFINE_GPU_KERNELS);
 TF_CALL_int64(DEFINE_GPU_KERNELS);
 TF_CALL_bfloat16(DEFINE_GPU_KERNELS);
+TF_CALL_uint8(DEFINE_GPU_KERNELS);
+TF_CALL_bool(DEFINE_GPU_KERNELS);
 
 #undef DEFINE_GPU_KERNELS
 #define DEFINE_GPU_KERNELS(T) template struct SplitCustom<Eigen::GpuDevice, T>;

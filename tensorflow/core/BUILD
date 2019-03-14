@@ -63,7 +63,15 @@
 # //tensorflow/tensorflow.bzl) will include the necessary symbols in binary
 # build targets.
 
+package_group(
+    name = "dependency_whitelist",
+    packages = [
+        "//learning/freud/topic_models/tensorflow/...",
+    ],
+)
+
 package(default_visibility = [
+    ":dependency_whitelist",
     "//tensorflow:internal",
     "//tensorflow_models:__subpackages__",
 ])
@@ -1589,6 +1597,7 @@ cc_library(
         "framework/function_testlib.h",
         "framework/shape_inference_testutil.h",
         "framework/tensor_testutil.h",
+        "graph/benchmark_testlib.h",
         "graph/testlib.h",
         # TODO(josh11b): Drop this once users are depending on
         # kernels:ops_testutil instead.
@@ -1629,8 +1638,8 @@ cc_library(
     srcs = ["common_runtime/testlib_ops.cc"],
     linkstatic = 1,  # Seems to be needed since alwayslink is broken in bazel
     deps = [
-        "//tensorflow/core:framework",
-        "//tensorflow/core:lib",
+        ":framework",
+        ":lib",
     ],
     alwayslink = 1,
 )
@@ -3145,6 +3154,7 @@ tf_cuda_library(
         ":lib_internal",
         ":proto_text",
         ":protos_all_cc",
+        "@com_google_absl//absl/algorithm:container",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/strings",
         "//third_party/eigen3",
